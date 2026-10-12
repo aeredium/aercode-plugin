@@ -1,0 +1,19 @@
+#!/bin/sh
+# The plugin's hook (brief CH2 §1): picks the hook binary built for this
+# machine, fixes the doorway from the plugin's one setting, and runs it.
+# Every road but a found binary refuses the call with exit 2, the one code
+# on which Claude Code stops the call; nothing here fails open.
+ROOT=$(cd "$(dirname "$0")/.." && pwd) || exit 2
+BIN=$(sh "$ROOT/bin/select-binary" aercode-hook "$ROOT") || {
+  echo "aercode-hook refused the call: the plugin at $ROOT carries no hook binary for this machine ($(uname -s) $(uname -m)); reinstall the plugin. The call did not run." >&2
+  exit 2
+}
+DOORWAY=$(cat "$ROOT/doorway" 2>/dev/null | tr -d '[:space:]')
+if [ -z "$DOORWAY" ]; then
+  echo "aercode-hook refused the call: the plugin at $ROOT names no doorway (the file doorway is missing or empty); reinstall the plugin. The call did not run." >&2
+  exit 2
+fi
+AERCODE_DOORWAY_URL="$DOORWAY"
+AERCODE_PLUGIN_ROOT="$ROOT"
+export AERCODE_DOORWAY_URL AERCODE_PLUGIN_ROOT
+exec "$BIN" "$@"

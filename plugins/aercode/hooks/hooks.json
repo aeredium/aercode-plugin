@@ -1,0 +1,41 @@
+{
+  "description": "The AEREDIUM doorway's hook on every tool call, the verifier at the start of a session (on startup and on resume), and the session's close at its end. The PreToolUse entry carries the 960-second timeout and block-on-failure of the managed hook; the plugin carries no policy, no rule, no key and no server declared for Claude Code: the model does not hold the judge's tools; the hook is the fitting.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}/bin/aercode-hook\"",
+            "timeout": 960,
+            "onFailure": "block"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}/bin/aercode\" verify",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}/bin/aercode-hook\" close",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "aeredium",
+  "owner": {
+    "name": "AEREDIUM",
+    "url": "https://aeredium.io"
+  },
+  "metadata": {
+    "description": "AEREDIUM's marketplace: the code policy doorway's fitting for Claude Code."
+  },
+  "plugins": [
+    {
+      "name": "aercode",
+      "source": "./plugins/aercode",
+      "description": "AEREDIUM's code policy doorway for Claude Code: every tool call judged before it runs, under your organisation's policy, with a signed receipt for every verdict.",
+      "version": "0.5.0",
+      "author": {
+        "name": "AEREDIUM"
+      },
+      "category": "security",
+      "keywords": [
+        "policy",
+        "governance",
+        "hooks",
+        "mcp",
+        "receipts"
+      ]
+    }
+  ]
+}

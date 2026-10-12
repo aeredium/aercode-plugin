@@ -1,0 +1,16 @@
+#!/bin/sh
+# The plugin's copy of the person's command (brief CH2 §1): the same
+# selection as the hook's, the same fixed doorway.
+ROOT=$(cd "$(dirname "$0")/.." && pwd) || exit 1
+BIN=$(sh "$ROOT/bin/select-binary" aercode "$ROOT") || {
+  echo "aercode: the plugin at $ROOT carries no binary for this machine ($(uname -s) $(uname -m)); reinstall the plugin." >&2
+  exit 1
+}
+DOORWAY=$(cat "$ROOT/doorway" 2>/dev/null | tr -d '[:space:]')
+if [ -n "$DOORWAY" ] && [ -z "${AERCODE_DOORWAY_URL:-}" ]; then
+  AERCODE_DOORWAY_URL="$DOORWAY"
+  export AERCODE_DOORWAY_URL
+fi
+AERCODE_PLUGIN_ROOT="$ROOT"
+export AERCODE_PLUGIN_ROOT
+exec "$BIN" "$@"

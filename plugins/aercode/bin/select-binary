@@ -1,0 +1,22 @@
+#!/bin/sh
+# select-binary <program> <plugin root>: prints the path of the binary
+# built for this machine, or exits 1. macOS takes the universal binary
+# under bin/darwin (or a per-architecture one); Linux amd64 and arm64 their
+# own; Windows, where Claude Code runs its hooks through Git Bash, the
+# windows-amd64 .exe.
+PROGRAM="$1"; ROOT="$2"
+OS=$(uname -s 2>/dev/null); ARCH=$(uname -m 2>/dev/null)
+case "$ARCH" in x86_64|amd64) ARCH=amd64 ;; aarch64|arm64) ARCH=arm64 ;; esac
+case "$OS" in
+  Darwin) CANDIDATES="darwin darwin-$ARCH"; EXT="" ;;
+  Linux) CANDIDATES="linux-$ARCH"; EXT="" ;;
+  MINGW*|MSYS*|CYGWIN*|Windows_NT) CANDIDATES="windows-$ARCH"; EXT=".exe" ;;
+  *) exit 1 ;;
+esac
+for c in $CANDIDATES; do
+  if [ -x "$ROOT/bin/$c/$PROGRAM$EXT" ] || [ -f "$ROOT/bin/$c/$PROGRAM$EXT" ]; then
+    echo "$ROOT/bin/$c/$PROGRAM$EXT"
+    exit 0
+  fi
+done
+exit 1

@@ -1,0 +1,19 @@
+{
+  "name": "aercode",
+  "version": "0.5.0",
+  "description": "AEREDIUM's code policy doorway for Claude Code: every tool call judged before it runs, under your organisation's policy, with a signed receipt for every verdict. Install, sign in once in the browser, and work.",
+  "author": {
+    "name": "AEREDIUM",
+    "url": "https://aeredium.io"
+  },
+  "homepage": "https://github.com/aeredium/code-policy-engine",
+  "repository": "https://github.com/aeredium/code-policy-engine",
+  "license": "SEE LICENSE IN README.md",
+  "keywords": [
+    "policy",
+    "governance",
+    "hooks",
+    "mcp",
+    "receipts"
+  ]
+}
