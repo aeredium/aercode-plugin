@@ -1,6 +1,6 @@
 {
   "name": "aercode",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "AEREDIUM's code policy doorway for Claude Code: every tool call judged before it runs, under your organisation's policy, with a signed receipt for every verdict. Install, sign in once in the browser, and work.",
   "author": {
     "name": "AEREDIUM",
