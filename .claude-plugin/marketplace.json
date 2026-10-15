@@ -11,8 +11,8 @@
     {
       "name": "aercode",
       "source": "./plugins/aercode",
-      "description": "AEREDIUM's code policy doorway for Claude Code: every tool call judged before it runs, under your organisation's policy, with a signed receipt for every verdict.",
-      "version": "0.7.0",
+      "description": "AEREDIUM's code policy doorway for Claude Code: every tool call judged before it runs, under your organisation's policy, with a signed receipt for every verdict. 0.8.0 adds your own policy: on your first visit to your panel the questionnaire is asked for the repositories you hold, the fast road adopts AEREDIUM's policy in one press and the slow road asks the questions one by one, and your holds then come to you. Six answers stay your organisation's on every road, the spend ceilings may be lowered and never raised, and aercode policy adopt, answer and show do the same from the keyboard.",
+      "version": "0.8.0",
       "author": {
         "name": "AEREDIUM"
       },
